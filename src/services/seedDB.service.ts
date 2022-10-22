@@ -63,13 +63,13 @@ async function saveData(data) {
   }
 }
 
-export async function initData() {
+export async function seedDB() {
   const fetchResult = await fetchData();
   if (!fetchResult) {
       return false;
   }
 
-  // const savedResult = await saveData(fetchResult);
+  await saveData(fetchResult);
 
   return true;
 }
