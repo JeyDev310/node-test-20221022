@@ -68,4 +68,18 @@ router.put('/select/:id', async (req, res) => {
   res.status(200).json({success: true}).end();
 });
 
+router.put('/unselect', async (req, res) => {
+  const sessionId = req.session.id;
+  const exist = await Session.findOne({
+    where: {sessionId}
+  }) as SessionModel;
+
+  if (exist) {
+    exist.selectedArticleId = '';
+    exist.save();
+  }
+
+  res.status(200).json({success: true}).end();
+});
+
 export default router;
